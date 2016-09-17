@@ -6,6 +6,7 @@
 
 #include "graph.h"
 #include <stack>
+#include <tuple>
 
 class Cycle {
 public:
@@ -16,7 +17,7 @@ public:
         return;
     }
 
-    bool has_cycle() { return has_cycle_; }
+    bool has_cycle() const { return has_cycle_; }
 
 private:
     void dfs(const Graph &graph, size_t v, size_t src) {
@@ -34,15 +35,15 @@ private:
     void dfs(const Graph &graph, size_t v) {
         std::stack<std::pair<size_t, size_t>> stack;
         stack.emplace(v, v);
+        size_t cur, src;
         while (!stack.empty()) {
-            auto v = stack.top().first;
-            auto src = stack.top().second;
-            marked_[v] = true;
+            std::tie(cur, src) = stack.top();
+            marked_[cur] = true;
             stack.pop();
-            for (auto w : graph.adjacent(v)) {
-                if (!marked_[w]) {
-                    stack.emplace(w, v);
-                } else if (w != src) {
+            for (auto w : graph.adjacent(cur)) {
+                if (!marked_[w])
+                    stack.emplace(w, cur);
+                else if (w != src) {
                     has_cycle_ = true;
                     return;
                 }

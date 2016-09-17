@@ -7,12 +7,13 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_bfs.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_construct_and_output.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_connected_component.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_dfs_paths.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_bfs_paths.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_dfs.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_cycle.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_two_color.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
