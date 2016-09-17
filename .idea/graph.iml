@@ -4,14 +4,14 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/graph_all.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/graph.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/paths.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/dfs.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_bfs_paths.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_bfs.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_dfs_paths.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_connected_component.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/test_construct_and_output.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/test_dfs.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/test_construct_and_output.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/test_paths.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

@@ -13,41 +13,42 @@
 #include <string>
 #include <numeric>
 #include <iterator>
+#include <iostream>
 #include <sstream>
 #include <fstream>
 
+using size_t = std::size_t;
+
 class Graph {
 public:
-    using SizeType = std::size_t;
-    using VertexType = std::size_t;
-    using VertexList = std::forward_list<VertexType>;
-    using Edge = std::pair<VertexType, VertexType>;
+    using VertexList = std::forward_list<size_t>;
+    using Edge = std::pair<size_t, size_t>;
 
-    Graph(SizeType vetex_count) : graph_(vetex_count), edges_count_(0) {}
+    Graph(size_t vetex_count) : graph_(vetex_count), edges_count_(0) {}
 
-    Graph(SizeType vetex_count, const std::vector<Edge> &edges) : Graph(vetex_count) {
+    Graph(size_t vetex_count, const std::vector<Edge> &edges) : Graph(vetex_count) {
         for (const auto &edge : edges)
             addEdge(edge.first, edge.second);
     }
 
     // 顶点数
-    SizeType vertex_count() const { return graph_.size(); }
+    size_t vertex_count() const { return graph_.size(); }
 
     // 边数
-    SizeType edge_count() const { return edges_count_; }
+    size_t edge_count() const { return edges_count_; }
 
     // 指定顶点的相邻顶点列表
-    const VertexList &adjacent(VertexType i) const { return graph_[i]; }
+    const VertexList &adjacent(size_t v) const { return graph_[v]; }
 
     // 添加一条边
-    void addEdge(VertexType v, VertexType w) {
+    void addEdge(size_t v, size_t w) {
         graph_[v].push_front(w);
         graph_[w].push_front(v);
         ++edges_count_;
     }
 
     // 顶点v的度数
-    SizeType degree(VertexType v) const {
+    size_t degree(size_t v) const {
         return list_size(adjacent(v));
     }
 
@@ -57,8 +58,8 @@ public:
     }
 
     // 最大度数
-    SizeType max_degree() const {
-        SizeType max = 0;
+    size_t max_degree() const {
+        size_t max = 0;
         for (const auto &adj : graph_) {
             auto degree = list_size(adj);
             if (degree > max)
@@ -68,9 +69,9 @@ public:
     }
 
     // 自环的个数
-    SizeType selfloops_count() const {
-        SizeType count = 0;
-        for (SizeType v = 0; v < graph_.size(); ++v)
+    size_t selfloops_count() const {
+        size_t count = 0;
+        for (size_t v = 0; v < graph_.size(); ++v)
             for (auto w : adjacent(v))
                 if (w == v) ++count;
         return count / 2;
@@ -80,7 +81,7 @@ public:
         std::ostringstream os;
         os << "vertex count: " << vertex_count() << std::endl
            << "edge count: " << edge_count() << std::endl;
-        for (SizeType v = 0; v < graph_.size(); ++v) {
+        for (size_t v = 0; v < graph_.size(); ++v) {
             os << v << ": ";
             for (auto w : adjacent(v))
                 os << w << " ";
@@ -90,19 +91,23 @@ public:
     }
 
 private:
-    SizeType list_size(const VertexList &list) const {
-        SizeType size = 0;
+    size_t list_size(const VertexList &list) const {
+        size_t size = 0;
         for (auto it = list.begin(); it != list.end(); ++it)
             ++size;
         return size;
     }
 
     std::vector<VertexList> graph_;
-    SizeType edges_count_;
+    size_t edges_count_;
 };
 
 Graph create_graph(std::istream &is) {
-    Graph::SizeType vertex_count = 0;
+    if (!is) {
+        std::cerr << "bad istream" << std::endl;
+        return Graph(0);
+    }
+    size_t vertex_count = 0;
     is >> vertex_count;
     std::vector<Graph::Edge> edges;
     Graph::Edge edge;
@@ -112,7 +117,6 @@ Graph create_graph(std::istream &is) {
 }
 
 Graph create_graph(const std::string &file_name) {
-    std::ifstream is("tiny_graph.txt");
-    if (!is) throw std::invalid_argument("open file failed.");
+    std::ifstream is(file_name);
     return create_graph(is);
 }

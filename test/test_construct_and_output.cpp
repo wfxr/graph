@@ -8,7 +8,7 @@
 using namespace std;
 
 int main() {
-    const Graph::SizeType tiny_graph_v = 13;
+    const size_t tiny_graph_v = 13;
     const vector<Graph::Edge> tiny_graph_edges{
             {0,  5},
             {4,  3},

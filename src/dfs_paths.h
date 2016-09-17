@@ -7,20 +7,20 @@
 #include "graph.h"
 #include <vector>
 
-class Paths {
+class DFSPaths {
 public:
-    Paths(const Graph &graph, Graph::VertexType src)
+    DFSPaths(const Graph &graph, size_t src)
             : src_(src), marked_(graph.vertex_count()), edge_to_(graph.vertex_count()) {
         dfs(graph, src);
     }
 
-    bool connected(Graph::VertexType dest) { return marked_[dest]; }
+    bool connected(size_t dest) const { return marked_[dest]; }
 
-    std::vector<Graph::VertexType> path_to(Graph::VertexType dest) {
-        std::vector<Graph::VertexType> path;
+    std::vector<size_t> path_to(size_t dest) const{
+        std::vector<size_t> path;
         if (!connected(dest)) return path;
 
-        for (Graph::VertexType x = dest;; x = edge_to_[x]) {
+        for (size_t x = dest;; x = edge_to_[x]) {
             path.push_back(x);
             if (x == src_) break;
         }
@@ -30,7 +30,7 @@ public:
     }
 
 private:
-    void dfs(const Graph &graph, Graph::SizeType src) {
+    void dfs(const Graph &graph, size_t src) {
         marked_[src] = true;
         for (auto w : graph.adjacent(src))
             if (!marked_[w]) {
@@ -39,7 +39,7 @@ private:
             }
     }
 
-    Graph::VertexType src_;
+    size_t src_;
     std::vector<bool> marked_;
-    std::vector<Graph::SizeType> edge_to_;
+    std::vector<size_t> edge_to_;
 };
