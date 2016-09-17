@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.1)
 
 add_executable(test_construct_and_output test_construct_and_output.cpp)
 add_executable(test_dfs test_dfs.cpp)
