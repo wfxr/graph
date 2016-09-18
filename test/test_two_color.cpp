@@ -2,7 +2,7 @@
 // Created by Wenxuan on 9/17/2016.
 //
 
-#include "tow_color.h"
+#include "two_color.h"
 #include <iostream>
 
 using namespace std;

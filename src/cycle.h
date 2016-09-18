@@ -12,8 +12,7 @@ class Cycle {
 public:
     Cycle(const Graph &graph) : marked_(graph.vertex_count()) {
         for (size_t v = 0; v < graph.vertex_count(); ++v)
-            if (!marked_[v])
-                dfs(graph, v);
+            if (!marked_[v]) dfs(graph, v);
         return;
     }
 
@@ -54,5 +53,3 @@ private:
     std::vector<bool> marked_;
     bool has_cycle_ = false;
 };
-
-

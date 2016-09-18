@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-add_executable(test_construct_and_output test_construct_and_output.cpp)
+add_executable(test_graph test_graph.cpp)
 add_executable(test_dfs test_dfs.cpp)
 add_executable(test_bfs test_bfs.cpp)
 add_executable(test_dfs_paths test_dfs_paths.cpp)
@@ -8,3 +8,4 @@ add_executable(test_bfs_paths test_bfs_paths.cpp)
 add_executable(test_connected_component test_connected_component.cpp)
 add_executable(test_cycle test_cycle.cpp)
 add_executable(test_two_color test_two_color.cpp)
+add_executable(test_symbol_graph test_symbol_graph.cpp)

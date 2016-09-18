@@ -4,18 +4,18 @@
 
 #pragma once
 
-#include <vector>
-#include <exception>
-#include <utility>
-#include <forward_list>
 #include <algorithm>
-#include <istream>
-#include <string>
-#include <numeric>
-#include <iterator>
-#include <iostream>
-#include <sstream>
+#include <exception>
+#include <forward_list>
 #include <fstream>
+#include <iostream>
+#include <istream>
+#include <iterator>
+#include <numeric>
+#include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
 
 using size_t = std::size_t;
 
@@ -24,11 +24,23 @@ public:
     using VertexList = std::forward_list<size_t>;
     using Edge = std::pair<size_t, size_t>;
 
-    Graph(size_t vetex_count) : graph_(vetex_count), edges_count_(0) {}
+    Graph(size_t vertex_count = 0) : graph_(vertex_count), edges_count_(0) {}
 
-    Graph(size_t vetex_count, const std::vector<Edge> &edges) : Graph(vetex_count) {
+    Graph(size_t vertex_count, const std::vector<Edge> &edges)
+        : Graph(vertex_count) {
         for (const auto &edge : edges)
-            addEdge(edge.first, edge.second);
+            add_edge(edge.first, edge.second);
+    }
+
+    void assign(size_t vertex_count, const std::vector<Edge> &edges) {
+        assign(vertex_count);
+        for (const auto &edge : edges)
+            add_edge(edge.first, edge.second);
+    }
+
+    void assign(size_t vertex_count) {
+        edges_count_ = 0;
+        graph_.assign(vertex_count, VertexList());
     }
 
     // 顶点数
@@ -41,29 +53,24 @@ public:
     const VertexList &adjacent(size_t v) const { return graph_[v]; }
 
     // 添加一条边
-    void addEdge(size_t v, size_t w) {
+    void add_edge(size_t v, size_t w) {
         graph_[v].push_front(w);
         graph_[w].push_front(v);
         ++edges_count_;
     }
 
     // 顶点v的度数
-    size_t degree(size_t v) const {
-        return list_size(adjacent(v));
-    }
+    size_t degree(size_t v) const { return list_size(adjacent(v)); }
 
     // 平均度数
-    double avg_degree() const {
-        return 2.0 * edge_count() / vertex_count();
-    }
+    double avg_degree() const { return 2.0 * edge_count() / vertex_count(); }
 
     // 最大度数
     size_t max_degree() const {
         size_t max = 0;
         for (const auto &adj : graph_) {
             auto degree = list_size(adj);
-            if (degree > max)
-                max = degree;
+            if (degree > max) max = degree;
         }
         return max;
     }
