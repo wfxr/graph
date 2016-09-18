@@ -2,7 +2,7 @@
 // Created by Wenxuan on 9/17/2016.
 //
 
-#include "cycle.h"
+#include "graph/cycle.h"
 #include <iostream>
 
 

@@ -2,7 +2,7 @@
 // Created by Wenxuan on 9/17/2016.
 //
 
-#include "dfs.h"
+#include "graph/dfs.h"
 #include <iostream>
 
 using namespace std;

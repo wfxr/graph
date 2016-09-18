@@ -2,7 +2,7 @@
 // Created by Wenxuan on 9/17/2016.
 //
 
-#include "connected_component.h"
+#include "graph/connected_component.h"
 
 using namespace std;
 

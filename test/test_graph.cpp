@@ -2,7 +2,7 @@
 // Created by Wenxuan on 9/15/2016.
 //
 
-#include "graph.h"
+#include "graph/graph.h"
 #include <iostream>
 
 using namespace std;

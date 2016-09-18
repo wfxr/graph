@@ -2,7 +2,7 @@
 // Created by Wenxuan on 9/17/2016.
 //
 
-#include "bfs_paths.h"
+#include "graph/bfs_paths.h"
 #include <iostream>
 
 using namespace std;
