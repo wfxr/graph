@@ -21,10 +21,10 @@ using size_t = std::size_t;
 
 class Graph {
 public:
-    using VertexList = std::forward_list<size_t>;
+    using AdjacentList = std::forward_list<size_t>;
     using Edge = std::pair<size_t, size_t>;
 
-    Graph(size_t vertex_count = 0) : graph_(vertex_count), edges_count_(0) {}
+    Graph(size_t vertex_count = 0) : adjacent_lists_(vertex_count), edges_count_(0) {}
 
     Graph(size_t vertex_count, const std::vector<Edge> &edges)
         : Graph(vertex_count) {
@@ -40,22 +40,22 @@ public:
 
     void assign(size_t vertex_count) {
         edges_count_ = 0;
-        graph_.assign(vertex_count, VertexList());
+        adjacent_lists_.assign(vertex_count, AdjacentList());
     }
 
     // 顶点数
-    size_t vertex_count() const { return graph_.size(); }
+    size_t vertex_count() const { return adjacent_lists_.size(); }
 
     // 边数
     size_t edge_count() const { return edges_count_; }
 
     // 指定顶点的相邻顶点列表
-    const VertexList &adjacent(size_t v) const { return graph_[v]; }
+    const AdjacentList &adjacent(size_t v) const { return adjacent_lists_[v]; }
 
     // 添加一条边
     void add_edge(size_t v, size_t w) {
-        graph_[v].push_front(w);
-        graph_[w].push_front(v);
+        adjacent_lists_[v].push_front(w);
+        adjacent_lists_[w].push_front(v);
         ++edges_count_;
     }
 
@@ -68,7 +68,7 @@ public:
     // 最大度数
     size_t max_degree() const {
         size_t max = 0;
-        for (const auto &adj : graph_) {
+        for (const auto &adj : adjacent_lists_) {
             auto degree = list_size(adj);
             if (degree > max) max = degree;
         }
@@ -78,7 +78,7 @@ public:
     // 自环的个数
     size_t selfloops_count() const {
         size_t count = 0;
-        for (size_t v = 0; v < graph_.size(); ++v)
+        for (size_t v = 0; v < vertex_count(); ++v)
             for (auto w : adjacent(v))
                 if (w == v) ++count;
         return count / 2;
@@ -88,7 +88,7 @@ public:
         std::ostringstream os;
         os << "vertex count: " << vertex_count() << std::endl
            << "edge count: " << edge_count() << std::endl;
-        for (size_t v = 0; v < graph_.size(); ++v) {
+        for (size_t v = 0; v < vertex_count(); ++v) {
             os << v << ": ";
             for (auto w : adjacent(v))
                 os << w << " ";
@@ -98,14 +98,14 @@ public:
     }
 
 private:
-    size_t list_size(const VertexList &list) const {
+    size_t list_size(const AdjacentList &list) const {
         size_t size = 0;
         for (auto it = list.begin(); it != list.end(); ++it)
             ++size;
         return size;
     }
 
-    std::vector<VertexList> graph_;
+    std::vector<AdjacentList> adjacent_lists_;
     size_t edges_count_;
 };
 

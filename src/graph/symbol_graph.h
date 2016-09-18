@@ -50,7 +50,7 @@ public:
         return symbol_to_id_.find(symbol) != symbol_to_id_.end();
     }
 
-    const Graph::VertexList& adjacent(const string& symbol) const {
+    const Graph::AdjacentList & adjacent(const string& symbol) const {
         return graph_.adjacent(id_of(symbol));
     }
 
