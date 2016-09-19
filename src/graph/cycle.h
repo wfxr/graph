@@ -11,9 +11,8 @@
 class Cycle {
 public:
     Cycle(const Graph &graph) : marked_(graph.vertex_count()) {
-        for (size_t v = 0; v < graph.vertex_count(); ++v)
+        for (size_t v = 0; v < graph.vertex_count() && has_cycle(); ++v)
             if (!marked_[v]) dfs(graph, v);
-        return;
     }
 
     bool has_cycle() const { return has_cycle_; }

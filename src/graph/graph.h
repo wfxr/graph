@@ -110,10 +110,6 @@ private:
 };
 
 Graph create_graph(std::istream &is) {
-    if (!is) {
-        std::cerr << "bad istream" << std::endl;
-        return Graph(0);
-    }
     size_t vertex_count = 0;
     is >> vertex_count;
     std::vector<Graph::Edge> edges;
@@ -125,5 +121,9 @@ Graph create_graph(std::istream &is) {
 
 Graph create_graph(const std::string &file_name) {
     std::ifstream is(file_name);
+    if (!is) {
+        std::cerr << "open file failed" << std::endl;
+        return Digraph();
+    }
     return create_graph(is);
 }

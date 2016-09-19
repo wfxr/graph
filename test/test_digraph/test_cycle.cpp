@@ -2,28 +2,36 @@
 // Created by Wenxuan on 9/17/2016.
 //
 
-#include "graph/cycle.h"
+#include "digraph/cycle.h"
 #include <iostream>
 
 using namespace std;
 
 int main(int argc, char **argv) {
     {
-        const auto graph = create_graph("tiny_graph.txt");
+        const auto graph = create_graph("tinyDAG.txt");
         cout << graph.to_string();
 
         Cycle cycle(graph);
         cout << "the graph has " << (cycle.has_cycle() ? "" : "no ") << "cycle." << endl;
+
+        for (auto v : cycle.cycle())
+            cout << v << " ";
+        cout << endl;
     }
 
     cout << endl;
 
     {
-        std::vector<Graph::Edge> edges{{0, 5}, {1, 0}, {2, 4}, {3, 2}, {4, 2}, {2, 0}};
-        const auto graph = Graph(6, edges);
+        std::vector<Digraph::Edge> edges{{0, 5}, {1, 0}, {2, 4}, {3, 2}, {2, 0}, {5, 1}};
+        const auto graph = Digraph(6, edges);
         cout << graph.to_string();
 
         Cycle cycle(graph);
         cout << "the graph has " << (cycle.has_cycle() ? "" : "no ") << "cycle." << endl;
+
+        for (auto v : cycle.cycle())
+            cout << v << " ";
+        cout << endl;
     }
 }

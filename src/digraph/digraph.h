@@ -66,10 +66,6 @@ private:
 };
 
 Digraph create_graph(std::istream &is) {
-    if (!is) {
-        std::cerr << "bad istream" << std::endl;
-        return Digraph(0);
-    }
     size_t vertex_count = 0;
     is >> vertex_count;
     std::vector<Digraph::Edge> edges;
@@ -81,5 +77,9 @@ Digraph create_graph(std::istream &is) {
 
 Digraph create_graph(const std::string &file_name) {
     std::ifstream is(file_name);
+    if (!is) {
+        std::cerr << "open file failed" << std::endl;
+        return Digraph();
+    }
     return create_graph(is);
 }
