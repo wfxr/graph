@@ -13,5 +13,6 @@ add_executable(test_degree_of_separation test_graph/test_degree_of_separation.cp
 
 add_executable(test_digraph test_digraph/test_digraph.cpp)
 add_executable(test_digraph_dfs test_digraph/test_dfs.cpp)
-add_executable(test_digraph_dfs_paths test_digraph/test_dfs_paths.cpp)
 add_executable(test_digraph_bfs test_digraph/test_bfs.cpp)
+add_executable(test_digraph_dfs_paths test_digraph/test_dfs_paths.cpp)
+add_executable(test_digraph_bfs_paths test_digraph/test_bfs_paths.cpp)
